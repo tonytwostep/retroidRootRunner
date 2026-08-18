@@ -57,6 +57,33 @@ Tune polling if needed: `RRUN_POLL_INTERVAL` (default 1s), `RRUN_TIMEOUT`
 Touches `stop`, waits for the runner to log its exit, then removes the
 leftover `cmd`/`stop`/`runner.pid` control files.
 
+## Application Flowchart
+ 
+```mermaid
+flowchart LR
+  subgraph HOST[Host Machine]
+    H[retroidRootRunner.sh]
+  end
+
+  subgraph DEVICE[Retroid Device]
+    E[entrypoint.sh]
+    R[runner.sh 🔁]
+    C[run cmd.run contents]
+    K[break loop, cleanup pid]
+    O[output.log]
+
+    E -->|spawn runner.sh as root| R
+    R -->|cmd detected| C
+    R -->|stop detected| K
+    C -->|append stdout and exit marker| O
+    K -->|append stop and loop exited logs| O
+  end
+
+  H -->|command| R
+  H -->|kill| R
+  O -->|poll and read| H
+```
+
 ## Notes / Use Cases
 
 - A hung command in `cmd.run` blocks the loop until it returns; wrap risky
