@@ -1,12 +1,12 @@
 # retroidRootRunner
 
-A persistent root command bridge for Retroid devices. Enabling root commands over adb on 
-stock/unrooted devices. 
+A persistent root command bridge for Retroid devices. Enabling root commands over adb on
+stock/unrooted devices.
 
 TL;DR: Run root commands an unrooted Retroid device!
 
-> [!WARNING] 
-> This project enables root-level command execution (from trusted devices only). 
+> [!WARNING]
+> This project enables root-level command execution (from trusted devices only).
 > Read and understand the files in this repo before running them.  
 > Use at your own risk.
 
@@ -16,7 +16,6 @@ TL;DR: Run root commands an unrooted Retroid device!
 - `adb` installed on your computer, device connected and authorized
 - A Retroid device with **"Run script as root"** developer feature available
   - Supported on most if not all Retroid devices (testing done with Retroid Pocket 5)
-
 
 ## Initial Setup
 
@@ -77,8 +76,19 @@ Touches `stop`, waits for the runner to log its exit, then removes the
 leftover `cmd`/`stop`/`runner.pid` control files.
 
 ## Application Flowchart
- 
+
 ```mermaid
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#262626',
+    'primaryTextColor': '#dbdbdb',
+    'primaryBorderColor': '#00ff99',
+    'lineColor': '#8d81ff',
+    'secondaryColor': '#1f1f1f',
+    'tertiaryColor': '#333'
+  }
+}}%%
 flowchart LR
   subgraph HOST[Host Machine]
     H[retroidRootRunner.sh]
