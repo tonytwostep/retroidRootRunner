@@ -40,9 +40,21 @@ adb shell "chmod 755 /sdcard/retroidRootRunner/*.sh" # Set execute permissions
 Helper script `retroidRootRunner.sh` sends commands, then polls `output.log` for a
 completion marker, and ultimately returns both to your shell (with error handling).
 
+For Example:
+
 ```bash
 ./retroidRootRunner.sh 'id; getenforce'
-./retroidRootRunner.sh 'pm list packages -s'
+```
+
+Output:
+
+```text
+=== Mon Aug 17 21:58:15 EDT 2026 ===
+id; getenforce
+--- output ---
+uid=0(root) gid=0(root) groups=0(root) context=u:r:pservice:s0
+Permissive
+=== exit 0 ===
 ```
 
 Tune polling if needed: `RRUN_POLL_INTERVAL` (default 1s), `RRUN_TIMEOUT`
@@ -52,6 +64,13 @@ Tune polling if needed: `RRUN_POLL_INTERVAL` (default 1s), `RRUN_TIMEOUT`
 
 ```bash
 ./retroidRootRunner.sh kill
+```
+
+Output:
+
+```text
+Stopping runner...
+Stopped and cleaned up.
 ```
 
 Touches `stop`, waits for the runner to log its exit, then removes the
